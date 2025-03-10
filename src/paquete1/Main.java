@@ -14,6 +14,7 @@ public class Main {
         Usuario [] array = md.Arreglo();
         
         int op, usuariosCreados = 0;
+        Gym gym = new Gym(0, 0, 0, 0, 0);
         do {
             System.out.println("------------------------------------");
             System.out.println("MENU");
@@ -72,6 +73,14 @@ public class Main {
                     array[usuariosCreados] = new Usuario(nombre, id, edad, tipo_de_cliente, password);
                     usuariosCreados ++;
                     System.out.println("---Cuenta creada---");
+                    
+                    // Actualizar datos del Gym
+                    if (tipo_de_cliente.equalsIgnoreCase("Premium")) {
+                        gym.VIPs();
+                    } else {
+                        gym.Normales();
+                    }
+                    gym.Registros();
                     break;
                 case 2:
                     // Mostrar usuarios
@@ -96,6 +105,13 @@ public class Main {
                     boolean confirmarPassword = md.ComprobarPassword(password, posicionEnArray, array);
                     if (confirmarPassword) {
                         System.out.println("Cliente " + array[posicionEnArray].getTipo_de_cliente());
+                        if (array[posicionEnArray].getTipo_de_cliente().equalsIgnoreCase("Premium")) {
+                            System.out.println("Pago por visita: L. 600");
+                            gym.PagosVIP();
+                        } else {
+                            System.out.println("Pago por visita: L. 500");
+                            gym.PagosNormales();
+                        }
                         System.out.println("Bienvenido");
                     } else {
                         System.out.println("Acceso denegado");
