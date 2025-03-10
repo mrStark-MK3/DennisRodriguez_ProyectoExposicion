@@ -129,25 +129,53 @@ public class Metodos {
     }
     
     // Metodos de eliminacion/acceso
-    public boolean BuscarUsuario(String nombre, String id, Usuario [] array) {
+    public String BuscarUsuario(String nombre, Usuario [] array) {
         
-        boolean existe = false;
+        Scanner input = new Scanner(System.in);
         
-        for (int i = 0; i <= array.length; i++) {
-            if (array[i].getNombre().equalsIgnoreCase(nombre) && array[i].getId().equals(id)) {
-                existe = true;
+        boolean encontrado = false;
+        do {
+            for (int i = 0; i <= array.length-1; i++) {
+                if (array[i] != null) {
+                    if (nombre.equalsIgnoreCase(array[i].getNombre())) {
+                        encontrado = true;
+                        break;
+                    }
+                } else {
+                    break;
+                }
+            }
+            if (!encontrado) {
+                System.out.println("Usuario no encontrado");
+                System.out.println("Ingresa tu nombre de nuevo");
+                System.out.print("-> ");
+                nombre = input.nextLine();    
+            } else {
                 break;
             }
+        } while (!encontrado);
+        
+        return nombre;
+    }
+    public String VerificarID(String id, Usuario [] array, int posicionObjeto) {
+        
+        Scanner input = new Scanner(System.in);
+        
+        while (!array[posicionObjeto].getId().equals(id)) {
+            System.out.println("ID incorrecto");
+            System.out.println("Intenta de nuevo");
+            System.out.print("-> ");
+            id = input.nextLine();
         }
         
-        return existe;
+        return id;
     }
-    public int PosicionEnArray(String nombre, String id, Usuario [] array) {
+    public int PosicionEnArray(String nombre, Usuario [] array) {
         
         int posicion = 0;
         
-        for (int i = 0; i < array.length; i++) {
-            if (array[i].getNombre().equalsIgnoreCase(nombre) && array[i].getId().equals(id)) {
+        for (int i = 0; i <= array.length-1; i++) {
+            if (array[i].getNombre().equalsIgnoreCase(nombre)) {
                 posicion = i;
                 break;
             }
@@ -175,5 +203,16 @@ public class Metodos {
         }
         
         return confirmado;
+    }
+    public void MostrarUsuarios(Usuario [] array) {
+        
+        System.out.println("Usuarios Registrados");
+        for (int i = 0; i <= array.length-1; i++) {
+            if (array[i] != null) {
+                System.out.println(array[i].getNombre());
+            } else {
+                break;
+            }
+        }
     }
 }

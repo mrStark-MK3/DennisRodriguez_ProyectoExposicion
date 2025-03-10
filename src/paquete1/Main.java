@@ -17,8 +17,8 @@ public class Main {
         do {
             System.out.println("------------------------------------");
             System.out.println("MENU");
-            System.out.println("1. Acceder (Usuario)");
-            System.out.println("2. Regitrar Usuario");
+            System.out.println("1. Regitrar Usuario");
+            System.out.println("2. Acceder (Usuario)");
             System.out.println("3. Eliminar Usuario");
             System.out.println("4. Salir");
             System.out.print("Ingresa el nuemro de la opcion: ");
@@ -26,8 +26,6 @@ public class Main {
             System.out.println("------------------------------------");
             switch (op) {
                 case 1:
-                    break;
-                case 2:
                     System.out.println("REGISTRARSE");
                     
                     // Proceso de registro
@@ -72,42 +70,74 @@ public class Main {
                     
                     // Guardar usuario en el array de Usuarios
                     array[usuariosCreados] = new Usuario(nombre, id, edad, tipo_de_cliente, password);
-                    System.out.println("---Cuenta creada---");
                     usuariosCreados ++;
+                    System.out.println("---Cuenta creada---");
                     break;
-                case 3:
+                case 2:
+                    // Mostrar usuarios
+                    System.out.println("------------------------------------");
+                    md.MostrarUsuarios(array);
+                    System.out.println("------------------------------------");
                     // Solicitar datos de confirmacion
                     System.out.print("Ingresa tu nombre: ");
                     input.nextLine();
                     nombre = input.nextLine();
+                    // Buscar Usuario
+                    nombre = md.BuscarUsuario(nombre, array);
+                    int posicionEnArray = md.PosicionEnArray(nombre, array); 
                     System.out.print("Ingresa tu ID: ");
-                    id = input.next();
+                    id = input.nextLine();
                     id = md.ConfirmarID(id);
-                    // Validar si existe
-                    boolean existe = md.BuscarUsuario(nombre, id, array);
-                    if (existe) {
-                        // Confirmar con la contrasenia
-                        System.out.println("Ingresa tu contrasenia");
-                        System.out.print("-> ");
-                        password = input.next();
-                        int posicionEnArray = md.PosicionEnArray(nombre, id, array);
-                        boolean confirmarPassword = md.ComprobarPassword(password, posicionEnArray, array);
-                        // Confirmar la eliminacion
-                        if (confirmarPassword) {
-                            System.out.println(array[posicionEnArray].toString());
-                            System.out.println("Confirmar");
-                            System.out.print("SI/NO -> ");
-                            char eliminar = input.next().charAt(0);
-                            if (eliminar == 's' || eliminar == 'S') {
-                                array[usuariosCreados] = null;
-                                System.out.println("---Cuenta eliminada---");
-                            }   
+                    id = md.VerificarID(id, array, posicionEnArray);
+                    // Confirmar con la contrasenia
+                    System.out.println("Ingresa tu contrasenia");
+                    System.out.print("-> ");
+                    password = input.next();
+                    boolean confirmarPassword = md.ComprobarPassword(password, posicionEnArray, array);
+                    if (confirmarPassword) {
+                        System.out.println("Cliente " + array[posicionEnArray].getTipo_de_cliente());
+                        System.out.println("Bienvenido");
+                    } else {
+                        System.out.println("Acceso denegado");
+                    }
+                    break;
+                case 3:
+                    // Mostrar usuarios
+                    System.out.println("------------------------------------");
+                    md.MostrarUsuarios(array);
+                    System.out.println("------------------------------------");
+                    // Solicitar datos de confirmacion
+                    System.out.print("Ingresa tu nombre: ");
+                    input.nextLine();
+                    nombre = input.nextLine();
+                    // Buscar Usuario
+                    nombre = md.BuscarUsuario(nombre, array);
+                    posicionEnArray = md.PosicionEnArray(nombre, array); 
+                    System.out.print("Ingresa tu ID: ");
+                    id = input.nextLine();
+                    id = md.ConfirmarID(id);
+                    id = md.VerificarID(id, array, posicionEnArray);
+                    // Confirmar con la contrasenia
+                    System.out.println("Ingresa tu contrasenia");
+                    System.out.print("-> ");
+                    password = input.next();
+                    confirmarPassword = md.ComprobarPassword(password, posicionEnArray, array);
+                    // Confirmar la eliminacion
+                    if (confirmarPassword) {
+                        System.out.println(array[posicionEnArray].toString());
+                        System.out.println("Seguro de Eliminar tu cuenta?");
+                        System.out.print("SI/NO -> ");
+                        char eliminar = input.next().charAt(0);
+                        if (eliminar == 's' || eliminar == 'S') {
+                            array[posicionEnArray] = null;
+                            System.out.println("---Cuenta eliminada---");
                         }
                     } else {
-                        System.out.println("Usuario no encontrado");
+                        System.out.println("Has superado el numero de intentos");
                     }
                     break;
                 case 4:
+                    
                     System.out.println("---");
                     break;
                 default:
