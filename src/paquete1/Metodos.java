@@ -23,7 +23,7 @@ public class Metodos {
                 for (int i = 0; i < password.length(); i++) {
                     if (password.charAt(i) > 64 && password.charAt(i) < 91) {
                         mayus ++;
-                    } else if (password.length() > 96 && password.charAt(i) < 123) {
+                    } else if (password.charAt(i) > 96 && password.charAt(i) < 123) {
                         minus ++;
                     } else if (password.charAt(i) > 47 && password.charAt(i) < 58) {
                         nums ++;
@@ -52,12 +52,12 @@ public class Metodos {
         
         Scanner input = new Scanner(System.in);
         
-        int plan;
+        int plan = 0;
         char confirmPlan = 0;
         do {
             System.out.println("1. Premium - L. 600");
             System.out.println("2. Normal - L. 500");
-            System.out.print("Ingresa el e numero de la opcion: ");
+            System.out.print("Ingresa el numero de la opcion: ");
             plan = input.nextInt();
             // Validar que el usuario ingrese una opcion valida
             while (plan < 1 || plan > 2) {
@@ -69,11 +69,13 @@ public class Metodos {
             switch (plan) {
                 case 1:
                     System.out.println("Confirma que desea usar el plan Premium?");
-                    confirmPlan = input.nextLine().charAt(0);
+                    System.out.print("(SI/NO) -> ");
+                    confirmPlan = input.next().charAt(0);
                     break;
                 case 2:
-                    System.out.println("Confirma que desea usar el plan Premium?");
-                    confirmPlan = input.nextLine().charAt(0);
+                    System.out.println("Confirma que desea usar el plan Normal?");
+                    System.out.print("(SI/NO) -> ");
+                    confirmPlan = input.next().charAt(0);
                     break;
             }
         } while (confirmPlan == 'n' || confirmPlan == 'N');
@@ -95,13 +97,43 @@ public class Metodos {
         
         return tipo_de_cliente;
     }
+    public String ConfirmarID(String id) {
+        
+        Scanner input = new Scanner(System.in);
+        
+        boolean valido = true;
+         do {
+            if (id.length() == 13) {
+                int invalidChars = 0;
+                for (int i = 0; i < id.length(); i++) {
+                    if (id.charAt(i) < 48 || id.charAt(i) > 57) {
+                        System.out.println("El ID debe contener solamente numeros");
+                        invalidChars ++;
+                        valido = false;
+                        break;
+                    }
+                }
+                if (invalidChars == 0) {
+                    break;
+                }
+            } else {
+                System.out.println("El ID debe tener 13 digitos");
+                valido = false;
+            }
+            System.out.println("Intenta de nuevo");
+            System.out.print("-> ");
+            id = input.nextLine();
+        } while (!valido);
+        
+        return id;
+    }
     
     // Metodos de eliminacion/acceso
     public boolean BuscarUsuario(String nombre, String id, Usuario [] array) {
         
         boolean existe = false;
         
-        for (int i = 0; i < array.length; i++) {
+        for (int i = 0; i <= array.length; i++) {
             if (array[i].getNombre().equalsIgnoreCase(nombre) && array[i].getId().equals(id)) {
                 existe = true;
                 break;

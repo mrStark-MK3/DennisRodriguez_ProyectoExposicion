@@ -41,14 +41,13 @@ public class Main {
                     
                     // Ingresar ID
                     System.out.print("Ingresa tu ID: ");
-                    String id = input.nextLine();
+                    String id = input.next();
+                    // Confirmar ID
+                    id = md.ConfirmarID(id);
                     
                     // ingresar edad
                     System.out.print("Ingresa tu edad: ");
                     int edad = input.nextInt();
-                    if (edad < 14) {
-                        break;
-                    }
                     
                     // Elegir el tipo de plan
                     System.out.println("Elije tu tipo de plan");
@@ -58,45 +57,54 @@ public class Main {
                     // Crear contrasenia
                     System.out.println("Crea tu contrasenia");
                     System.out.print("-> ");
-                    String password = input.nextLine();
+                    String password = input.next();
                     // Validar contrasenia
                     password = md.ValidarPassword(password);
                     System.out.println("Confirmar contrasenia");
                     System.out.print("-> ");
-                    String confirm = input.nextLine();
+                    String confirm = input.next();
                     // Confirmar contrasenia
-                    while (password.equals(confirm)) {
+                    while (!password.equals(confirm)) {
                         System.out.println("Contrasenia incorrecta");
-                        System.out.println("-> ");
-                        confirm = input.nextLine();
+                        System.out.print("-> ");
+                        confirm = input.next();
                     }
                     
                     // Guardar usuario en el array de Usuarios
                     array[usuariosCreados] = new Usuario(nombre, id, edad, tipo_de_cliente, password);
+                    System.out.println("---Cuenta creada---");
                     usuariosCreados ++;
                     break;
                 case 3:
                     // Solicitar datos de confirmacion
                     System.out.print("Ingresa tu nombre: ");
+                    input.nextLine();
                     nombre = input.nextLine();
                     System.out.print("Ingresa tu ID: ");
-                    id = input.nextLine();
+                    id = input.next();
+                    id = md.ConfirmarID(id);
                     // Validar si existe
                     boolean existe = md.BuscarUsuario(nombre, id, array);
                     if (existe) {
                         // Confirmar con la contrasenia
-                        password = input.nextLine();
+                        System.out.println("Ingresa tu contrasenia");
+                        System.out.print("-> ");
+                        password = input.next();
                         int posicionEnArray = md.PosicionEnArray(nombre, id, array);
                         boolean confirmarPassword = md.ComprobarPassword(password, posicionEnArray, array);
-                        
+                        // Confirmar la eliminacion
                         if (confirmarPassword) {
+                            System.out.println(array[posicionEnArray].toString());
                             System.out.println("Confirmar");
                             System.out.print("SI/NO -> ");
-                            char eliminar = input.nextLine().charAt(0);
+                            char eliminar = input.next().charAt(0);
                             if (eliminar == 's' || eliminar == 'S') {
                                 array[usuariosCreados] = null;
+                                System.out.println("---Cuenta eliminada---");
                             }   
                         }
+                    } else {
+                        System.out.println("Usuario no encontrado");
                     }
                     break;
                 case 4:

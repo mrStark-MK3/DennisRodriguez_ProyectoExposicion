@@ -58,4 +58,18 @@ public class Usuario {
         this.password = password;
     }
     
+    // ToString
+
+    @Override
+    public String toString() {
+        return "------------------------------------\n" +
+                "Usuario" + 
+                "\nNombre: " + nombre + 
+                "\nID: " + id + 
+                "\nEdad: " + edad + 
+                "\nTipo de Cliente: " + tipo_de_cliente + 
+                "\nContrasenia: " + password + 
+                "\n------------------------------------";
+    }
+    
 }
