@@ -83,13 +83,14 @@ public class Gym {
 
     @Override
     public String toString() {
-        return "GIMNASIO" + 
+        return "GIMNASIO" +
+                "\n------------------------------------" +
                 "\nUsuarios Creados/Registrados: " + usersCreados + 
                 "\nClientes Premium: " + clientesVIP + 
                 "\nClientes Normales: " + clientesNormales + 
-                "\n Visitas Totales: " + visitas + 
+                "\nVisitas Totales: " + visitas + 
                 "\nGenerado: L." + dinero + 
-                '}';
+                "\n------------------------------------";
     }
     
 }

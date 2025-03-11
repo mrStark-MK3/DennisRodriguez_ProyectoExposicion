@@ -113,6 +113,7 @@ public class Main {
                             gym.PagosNormales();
                         }
                         System.out.println("Bienvenido");
+                        gym.Visitas();
                     } else {
                         System.out.println("Acceso denegado");
                     }
@@ -153,8 +154,7 @@ public class Main {
                     }
                     break;
                 case 4:
-                    
-                    System.out.println("---");
+                    System.out.println(gym.toString());
                     break;
                 default:
                     System.out.println("Opcion no valida");
