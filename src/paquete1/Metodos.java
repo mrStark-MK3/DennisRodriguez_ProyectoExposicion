@@ -139,14 +139,12 @@ public class Metodos {
         
         boolean encontrado = false;
         do {
-            for (int i = 0; i <= array.length; i++) {
+            for (int i = 0; i <= array.length-1; i++) {
                 if (array[i] != null) {
                     if (nombre.equalsIgnoreCase(array[i].getNombre())) {
                         encontrado = true;
                         break;
                     }
-                } else {
-                    break;
                 }
             }
             if (!encontrado) {
@@ -178,10 +176,12 @@ public class Metodos {
         
         int posicion = 0;
         
-        for (int i = 0; i <= array.length; i++) {
-            if (array[i].getNombre().equalsIgnoreCase(nombre)) {
-                posicion = i;
-                break;
+        for (int i = 0; i <= array.length-1; i++) {
+            if (array[i] != null) {
+                if (array[i].getNombre().equalsIgnoreCase(nombre)) {
+                    posicion = i;
+                    break;
+                }    
             }
         }
         
@@ -212,11 +212,9 @@ public class Metodos {
     public void MostrarUsuarios(Usuario [] array) {
         
         System.out.println("Usuarios Registrados");
-        for (int i = 0; i <= array.length; i++) {
+        for (int i = 0; i <= array.length-1; i++) {
             if (array[i] != null) {
                 System.out.println(array[i].getNombre());
-            } else {
-                break;
             }
         }
     }
