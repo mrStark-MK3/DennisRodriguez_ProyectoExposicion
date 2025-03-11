@@ -68,14 +68,18 @@ public class Metodos {
             }
             switch (plan) {
                 case 1:
-                    System.out.println("Confirma que desea usar el plan Premium?");
-                    System.out.print("(SI/NO) -> ");
-                    confirmPlan = input.next().charAt(0);
+                    do {
+                        System.out.println("Confirma que desea usar el plan Premium?");
+                        System.out.print("(SI/NO) -> ");
+                        confirmPlan = input.next().charAt(0);    
+                    } while (confirmPlan != 's' && confirmPlan != 'S' && confirmPlan != 'N' && confirmPlan != 'n');
                     break;
                 case 2:
-                    System.out.println("Confirma que desea usar el plan Normal?");
-                    System.out.print("(SI/NO) -> ");
-                    confirmPlan = input.next().charAt(0);
+                    do {
+                        System.out.println("Confirma que desea usar el plan Normal?");
+                        System.out.print("(SI/NO) -> ");
+                        confirmPlan = input.next().charAt(0);    
+                    } while (confirmPlan != 's' && confirmPlan != 'S' && confirmPlan != 'N' && confirmPlan != 'n');
                     break;
             }
         } while (confirmPlan == 'n' || confirmPlan == 'N');

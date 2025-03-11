@@ -9,12 +9,12 @@ public class Main {
         Scanner input = new Scanner(System.in);
         
         Metodos md = new Metodos();
+        Gym gym = new Gym(0, 0, 0, 0, 0);
         
         // Arreglo de usuarios
         Usuario [] array = md.Arreglo();
         
         int op, usuariosCreados = 0;
-        Gym gym = new Gym(0, 0, 0, 0, 0);
         do {
             System.out.println("------------------------------------");
             System.out.println("MENU");
@@ -142,9 +142,13 @@ public class Main {
                     // Confirmar la eliminacion
                     if (confirmarPassword) {
                         System.out.println(array[posicionEnArray].toString());
-                        System.out.println("Seguro de Eliminar tu cuenta?");
-                        System.out.print("SI/NO -> ");
-                        char eliminar = input.next().charAt(0);
+                        char eliminar = 0;
+                        do {
+                            System.out.println("Seguro de Eliminar tu cuenta?");
+                            System.out.print("SI/NO -> ");
+                            eliminar = input.next().charAt(0);    
+                        } while (eliminar != 's' && eliminar != 'S' && eliminar != 'n' && eliminar != 'N');
+                        
                         if (eliminar == 's' || eliminar == 'S') {
                             array[posicionEnArray] = null;
                             System.out.println("---Cuenta eliminada---");
